@@ -1,5 +1,5 @@
 class Teacher:
-    def __init__(self, number, name, program, antiprogram = None, prioritet = None, smeni = None):
+    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None):
         """Constructor"""
         self.number = number
         self.program = program
@@ -8,9 +8,9 @@ class Teacher:
         self.smeni = smeni
 
 class ClassRoom:
-    def __init__(self, name, places, type_of_discipline, differences, prioritet_discipline, anti_discipline):
+    def __init__(self, name=None, places=None, type_of_discipline=None, differences=None, prioritet_discipline=None, anti_discipline=None):
         """Constructor"""
-        self.name= name
+        self.name = name
         self.places = places
         self.type_of_discipline = type_of_discipline
         self.differences = differences
@@ -18,7 +18,7 @@ class ClassRoom:
         self.anti_discipline = anti_discipline
 
 class Program:
-    def __init__(self, number_of_program, name, hours, hours_proizv, hours_distant, day_offline, count_of_groups, count_of_worker, count_of_listener, count_of_teacher, count_of_classroom):
+    def __init__(self, number_of_program=None, name=None, hours=None, hours_proizv=None, hours_distant=None, day_offline=None, count_of_groups=None, count_of_worker=None, count_of_listener=None, count_of_teacher=None, count_of_classroom=None):
         self.number_of_program = number_of_program
         self.name = name
         self.hours = hours
@@ -30,5 +30,6 @@ class Program:
         self.count_of_listener = count_of_listener
         self.count_of_teacher = count_of_teacher
         self.count_of_classroom = count_of_classroom
+
 
 Teach = Teacher('20435', 'Лебедев', [1, 2], [])
