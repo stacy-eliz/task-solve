@@ -12,6 +12,7 @@ class Teacher:
         return('Teacher: '+str(self.name))
 
 class ClassRoom:
+    
     def __init__(self, name=None, places=None, type_of_discipline=None, differences=None, prioritet_discipline=None, anti_discipline=None):
         """Constructor"""
         self.name = name
@@ -20,6 +21,7 @@ class ClassRoom:
         self.differences = differences
         self.prioritet_discipline = prioritet_discipline
         self.anti_discipline = anti_discipline
+        self.is_busy = 0
     def __str__(self):
         return('ClassRoom: '+str(self.name))
     def __repr__(self):
@@ -45,5 +47,26 @@ class Program:
         return('Programm: '+str(self.name)+' Hourse: '+str(self.hours))
     def __repr__(self):
         return('Programm: '+str(self.name)+' Hourse: '+str(self.hours))
+class Shedule:
+    def __init__(self): 
+        self.busy_room = {}
+    def Add_Room(number, date, time, name):
+        self.busy_room[number] = [date, time, name]
+        
 
-Teach = Teacher('20435', 'Лебедев', [1, 2], [])
+Shedule1 = Shedule()
+
+
+
+a = [[0 for i in range(52)] for j in range(8)] #расписание годовое
+b = [] #массив классов программ
+c = [] #массив классов аудиторий
+for i in range(8):
+    for j in range(52):
+        for k in range(len(b)):
+            if a[j][i] in b[k].name or b[k].name in a[j][i]:
+                for l in range(len(c)):
+                    if b[k].features in c[l].differences and not(c[l].is_busy):
+                        Shedule1.Add_Room(c[l].name, a[j][0], None, a[j][i])
+                        c[l].is_busy = 1
+                        break;
