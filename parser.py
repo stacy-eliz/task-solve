@@ -10,20 +10,35 @@ for j in range(2):
     if j == 0:
         sheet = wb['параметры аудиторий']
         for i in range(2, 13):
-            auditoriums.append(
-                generator.ClassRoom(sheet['A{}'.format(i)], sheet['B{}'.format(i)], sheet['C{}'.format(i)],
-                                    sheet['D{}'.format(i)], sheet['E{}'.format(i)], sheet['F{}'.format(i)]))
+            if ', ' in str(sheet['A{}'.format(i)].value):
+                x = str(sheet['A{}'.format(i)].value).split(',')
+                for j in x:
+                    j = j.strip()
+                    auditoriums.append(
+                        generator.ClassRoom(j, sheet['B{}'.format(i)].value, sheet['C{}'.format(i)].value,
+                                            sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
+                                            sheet['F{}'.format(i)].value))
+            else:
+                auditoriums.append(
+                    generator.ClassRoom(sheet['A{}'.format(i)].value, sheet['B{}'.format(i)].value,
+                                        sheet['C{}'.format(i)].value,
+                                        sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
+                                        sheet['F{}'.format(i)].value))
     elif j == 1:
         sheet = wb['параметры программ']
-        x_ = sheet['B2'].value
         for i in range(2, 42):
             x = sheet['B{}'.format(i)].value
             if x:
                 x = str(x).replace('\n', '')
             programms.append(
-                generator.Program(sheet['A{}'.format(i)], x, sheet['C{}'.format(i)], sheet['D{}'.format(i)],
-                                  sheet['E{}'.format(i)], sheet['F{}'.format(i)], sheet['G{}'.format(i)],
-                                  sheet['H{}'.format(i)], sheet['I{}'.format(i)], sheet['J{}'.format(i)],
-                                  sheet['K{}'.format(i)], sheet['L{}'.format(i)], sheet['M{}'.format(i)]))
+                generator.Program(sheet['A{}'.format(i)].value, x, sheet['C{}'.format(i)].value,
+                                  sheet['D{}'.format(i)].value,
+                                  sheet['E{}'.format(i)].value, sheet['F{}'.format(i)].value,
+                                  sheet['G{}'.format(i)].value,
+                                  sheet['H{}'.format(i)].value, sheet['I{}'.format(i)].value,
+                                  sheet['J{}'.format(i)].value,
+                                  sheet['K{}'.format(i)].value, sheet['L{}'.format(i)].value,
+                                  sheet['M{}'.format(i)].value))
+
 
             
