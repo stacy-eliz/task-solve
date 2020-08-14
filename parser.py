@@ -4,27 +4,6 @@ import generator
 wb = openpyxl.load_workbook('Приложение №2.xlsx')
 sheets = wb.sheetnames
 
-name1 = []
-places = []
-type_of_discipline = []
-differences = []
-prioritet_discipline = []
-anti_discipline = []
-
-discipline = []
-curriculum = []
-features = []
-hours = []
-hours_proizv = []
-hours_distant = []
-day_offline = []
-count_of_groups = []
-count_of_worker = []
-count_of_listener = []
-count_of_teacher = []
-count_of_classroom = []
-number_of_program = []
-
 auditoriums = []
 programms = []
 for j in range(2):
@@ -46,3 +25,5 @@ for j in range(2):
                                   sheet['E{}'.format(i)], sheet['F{}'.format(i)], sheet['G{}'.format(i)],
                                   sheet['H{}'.format(i)], sheet['I{}'.format(i)], sheet['J{}'.format(i)],
                                   sheet['K{}'.format(i)], sheet['L{}'.format(i)], sheet['M{}'.format(i)]))
+
+            
