@@ -1,6 +1,6 @@
 import openpyxl
 from pathlib import Path
-from generator import Teacher
+from classes import Teacher
 def Full_teacher(path) -> [Teacher]:
   xlsx_file = Path(path)
   wb_obj = openpyxl.load_workbook(xlsx_file)

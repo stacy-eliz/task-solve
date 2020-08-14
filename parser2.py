@@ -1,5 +1,5 @@
 import openpyxl
-import generator
+import classes
 
 
 def application2_audit(path):
@@ -13,12 +13,12 @@ def application2_audit(path):
             for j in x:
                 j = j.strip()
                 auditoriums.append(
-                    generator.ClassRoom(j, sheet['B{}'.format(i)].value, sheet['C{}'.format(i)].value,
+                    classes.ClassRoom(j, sheet['B{}'.format(i)].value, sheet['C{}'.format(i)].value,
                                         sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
                                         sheet['F{}'.format(i)].value))
         else:
             auditoriums.append(
-                generator.ClassRoom(sheet['A{}'.format(i)].value, sheet['B{}'.format(i)].value,
+                classes.ClassRoom(sheet['A{}'.format(i)].value, sheet['B{}'.format(i)].value,
                                     sheet['C{}'.format(i)].value,
                                     sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
                                     sheet['F{}'.format(i)].value))
@@ -36,7 +36,7 @@ def application2_programm(path):
         if x_:
             out = x_.replace('\n', ' ')
         programms.append(
-            generator.Program(sheet['A{}'.format(i)].value, out, sheet['C{}'.format(i)].value,
+            classes.Program(sheet['A{}'.format(i)].value, out, sheet['C{}'.format(i)].value,
                               sheet['D{}'.format(i)].value,
                               sheet['E{}'.format(i)].value, sheet['F{}'.format(i)].value,
                               sheet['G{}'.format(i)].value,
