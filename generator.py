@@ -7,7 +7,9 @@ class Teacher:
         self.antiprogram = antiprogram
         self.smeni = smeni
     def __str__(self):
-        return('Teacher: '+self.name)
+        return('Teacher: '+str(self.name))
+    def __repr__(self):
+        return('Teacher: '+str(self.name))
 
 class ClassRoom:
     def __init__(self, name=None, places=None, type_of_discipline=None, differences=None, prioritet_discipline=None, anti_discipline=None):
@@ -19,7 +21,9 @@ class ClassRoom:
         self.prioritet_discipline = prioritet_discipline
         self.anti_discipline = anti_discipline
     def __str__(self):
-        return('ClassRoom: '+self.name)
+        return('ClassRoom: '+str(self.name))
+    def __repr__(self):
+        return('ClassRoom: '+str(self.name))
 
 
 class Program:
@@ -38,7 +42,8 @@ class Program:
         self.count_of_teacher = count_of_teacher
         self.count_of_classroom = count_of_classroom
     def __str__(self):
-        return('Programm: '+self.name+' Hourse: '+self.hours)
-
+        return('Programm: '+str(self.name)+' Hourse: '+str(self.hours))
+    def __repr__(self):
+        return('Programm: '+str(self.name)+' Hourse: '+str(self.hours))
 
 Teach = Teacher('20435', 'Лебедев', [1, 2], [])
