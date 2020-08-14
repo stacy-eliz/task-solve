@@ -18,9 +18,11 @@ class ClassRoom:
         self.anti_discipline = anti_discipline
 
 class Program:
-    def __init__(self, number_of_program=None, name=None, hours=None, hours_proizv=None, hours_distant=None, day_offline=None, count_of_groups=None, count_of_worker=None, count_of_listener=None, count_of_teacher=None, count_of_classroom=None):
+    def __init__(self, number_of_program=None, name=None, programme=None, features=None, hours=None, hours_proizv=None, hours_distant=None, day_offline=None, count_of_groups=None, count_of_worker=None, count_of_listener=None, count_of_teacher=None, count_of_classroom=None):
         self.number_of_program = number_of_program
         self.name = name
+        self.programme = programme
+        self.features = features
         self.hours = hours
         self.hours_proizv = hours_proizv
         self.hours_distant = hours_distant
@@ -30,6 +32,7 @@ class Program:
         self.count_of_listener = count_of_listener
         self.count_of_teacher = count_of_teacher
         self.count_of_classroom = count_of_classroom
+
 
 
 Teach = Teacher('20435', 'Лебедев', [1, 2], [])
