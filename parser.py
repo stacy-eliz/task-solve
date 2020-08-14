@@ -26,12 +26,13 @@ for j in range(2):
                                         sheet['F{}'.format(i)].value))
     elif j == 1:
         sheet = wb['параметры программ']
+        out = sheet['B2'.format(i)].value
         for i in range(2, 42):
-            x = sheet['B{}'.format(i)].value
-            if x:
-                x = str(x).replace('\n', '')
+            x_ = sheet['B{}'.format(i)].value
+            if x_:
+                out = x_.replace('\n', ' ')
             programms.append(
-                generator.Program(sheet['A{}'.format(i)].value, x, sheet['C{}'.format(i)].value,
+                generator.Program(sheet['A{}'.format(i)].value, out, sheet['C{}'.format(i)].value,
                                   sheet['D{}'.format(i)].value,
                                   sheet['E{}'.format(i)].value, sheet['F{}'.format(i)].value,
                                   sheet['G{}'.format(i)].value,
@@ -39,8 +40,7 @@ for j in range(2):
                                   sheet['J{}'.format(i)].value,
                                   sheet['K{}'.format(i)].value, sheet['L{}'.format(i)].value,
                                   sheet['M{}'.format(i)].value))
-                
-print(programms)
+
 
 
             
