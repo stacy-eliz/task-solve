@@ -39,6 +39,8 @@ for j in range(2):
                                   sheet['J{}'.format(i)].value,
                                   sheet['K{}'.format(i)].value, sheet['L{}'.format(i)].value,
                                   sheet['M{}'.format(i)].value))
+                
+print(programms)
 
 
             
