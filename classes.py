@@ -1,9 +1,8 @@
 class Teacher:
-    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None, disciplin=None):
+    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None):
         """Constructor"""
         self.number = number
         self.program = program
-        self.disciplin = disciplin
         self.name = name
         self.antiprogram = antiprogram
         self.smeni = smeni

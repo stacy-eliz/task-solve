@@ -52,4 +52,3 @@ def application1(path):
     weeks.insert(0, direction)
     weeks[0] = weeks[0][42:]
     return weeks
-
