@@ -14,14 +14,14 @@ def application2_audit(path):
                 j = j.strip()
                 auditoriums.append(
                     classes.ClassRoom(j, sheet['B{}'.format(i)].value, sheet['C{}'.format(i)].value,
-                                        sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
-                                        sheet['F{}'.format(i)].value))
+                                      sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
+                                      sheet['F{}'.format(i)].value))
         else:
             auditoriums.append(
                 classes.ClassRoom(sheet['A{}'.format(i)].value, sheet['B{}'.format(i)].value,
-                                    sheet['C{}'.format(i)].value,
-                                    sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
-                                    sheet['F{}'.format(i)].value))
+                                  sheet['C{}'.format(i)].value,
+                                  sheet['D{}'.format(i)].value, sheet['E{}'.format(i)].value,
+                                  sheet['F{}'.format(i)].value))
     return auditoriums
 
 
@@ -37,11 +37,11 @@ def application2_programm(path):
             out = x_.replace('\n', ' ')
         programms.append(
             classes.Program(sheet['A{}'.format(i)].value, out, sheet['C{}'.format(i)].value,
-                              sheet['D{}'.format(i)].value,
-                              sheet['E{}'.format(i)].value, sheet['F{}'.format(i)].value,
-                              sheet['G{}'.format(i)].value,
-                              sheet['H{}'.format(i)].value, sheet['I{}'.format(i)].value,
-                              sheet['J{}'.format(i)].value,
-                              sheet['K{}'.format(i)].value, sheet['L{}'.format(i)].value,
-                              sheet['M{}'.format(i)].value))
+                            sheet['D{}'.format(i)].value,
+                            sheet['E{}'.format(i)].value, sheet['F{}'.format(i)].value,
+                            sheet['G{}'.format(i)].value,
+                            sheet['H{}'.format(i)].value, sheet['I{}'.format(i)].value,
+                            sheet['J{}'.format(i)].value,
+                            sheet['K{}'.format(i)].value, sheet['L{}'.format(i)].value,
+                            sheet['M{}'.format(i)].value))
     return programms

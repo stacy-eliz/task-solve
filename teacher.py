@@ -8,6 +8,7 @@ path = "app2.xlsx"
 a = application1(path_app1)
 b = Full_teacher(path)  # массив классов преподавателей
 
+
 def shorter(st, f):
     if f:
         for i in range(len(st)):
@@ -18,6 +19,7 @@ def shorter(st, f):
             if st[i].isnumeric():
                 return st[i:][:11]
 
+
 teachers = Full_teacher('app2.xlsx')
 
 for i in range(1, len(a)):
@@ -27,7 +29,8 @@ for i in range(1, len(a)):
                 pass
             else:
                 for m in teachers:
-                    x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace('Организация пассажирских перевозок', 'Пассажирские перевозки')
+                    x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
+                        'Организация пассажирских перевозок', 'Пассажирские перевозки')
                     if x in a[0][j] or a[0][j] in x:
                         Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j])
     Shedule1.leave_teachers()

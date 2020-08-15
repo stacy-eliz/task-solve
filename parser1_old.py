@@ -1,8 +1,8 @@
 import openpyxl
 
-def application1(path):
 
-    wb = openpyxl.load_workbook(path) #'Приложение №1.xlsx'
+def application1(path):
+    wb = openpyxl.load_workbook(path)  # 'Приложение №1.xlsx'
 
     direction = []
     weeks = []
