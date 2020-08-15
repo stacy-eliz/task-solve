@@ -6,6 +6,7 @@ import re
 import matplotlib.pyplot as plt
 import numpy as np
 from random import shuffle
+import random
 
 Shedule1 = classes.Shedule()
 path_app1 = "app1.xlsx"
@@ -250,20 +251,24 @@ def graf_tadjyk3():
 ####    plt.plot(x3,y3, label = "фамилия", color = "red")
 
     lines = []
-    color = []
     labels = []
     s = 122222
-    for i in teacher_time:
+    number_of_colors = len(teacher_time)
+
+    color = ["#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
+             for i in range(number_of_colors)]
+    for j,i in enumerate(teacher_time):
         x3 = teacher_time[i].keys()
         y3 = teacher_time[i].values()
         
         labels.append(i)
-        s = "#"+str(s)
+##        s = "#"+str(s)
         print(i)
-        a, = plt.plot(x3,y3, color = s)
+
+        a, = plt.plot(x3,y3, color = color[j])
         lines.append(a)
-        s = int(s[1:])
-        s+=150
+##        s = int(s[1:])
+##        s+=150
     print(labels)
     plt.legend(lines,labels)
 
