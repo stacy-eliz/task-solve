@@ -45,6 +45,7 @@ teachers = Full_teacher('app2.xlsx')
 flag = False
 flag2 = False
 count = 0
+unic = []
 for i in range(1, len(a)):
     flag1 = True
     for j in range(len(a[i])):
@@ -52,37 +53,43 @@ for i in range(1, len(a)):
             count += 1
             flag1 = False
         elif a[i][j] != None and not 'Неделя' in a[i][j]:
-            if isinstance(a[i][j], list):
-                for k in a[i][j]:
+            if a[i][j] not in unic:
+                unic.append(a[i][j])
+                if isinstance(a[i][j], list):
+                    # print(a[i][j], count)
+                    for k in a[i][j]:
+                        shuffle(teachers)
+                        for m in teachers:
+                            x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
+                                'Организация пассажирских перевозок', 'Пассажирские перевозки')
+                            if x in a[0][j] or a[0][j] in x:
+                                if not m.is_busy:
+                                    Shedule1.Add_Teacher(m, shorter(k, 0), x, k, count)
+                                    m.is_busy = 1
+                                    flag2 = True
+                                    break
+                        if flag2:
+                            flag2 = False
+                            break
+                else:
+                    shuffle(teachers)
                     for m in teachers:
-                        x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
+                        x = m.disciplin.replace('Управление безопасностью полетов', 'Авиационная безопасность').replace(
                             'Организация пассажирских перевозок', 'Пассажирские перевозки')
                         if x in a[0][j] or a[0][j] in x:
                             if not m.is_busy:
-                                Shedule1.Add_Teacher(m, shorter(k, 0), x, k, count)
+                                Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j], count)
                                 m.is_busy = 1
-                                flag2 = True
+                                flag = True
                                 break
-                    if flag2:
-                        flag2 = False
+                    if flag:
+                        flag = False
                         break
-            else:
-                for m in teachers:
-                    x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
-                        'Организация пассажирских перевозок', 'Пассажирские перевозки')
-                    if x in a[0][j] or a[0][j] in x:
-                        if not m.is_busy:
-                            Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j], count)
-                            m.is_busy = 1
-                            flag = True
-                            break
-                if flag:
-                    flag = False
-                    break
     Shedule1.leave_teachers()
 
-##for j in Shedule1.busy_teachers:
-##    print(j, Shedule1.busy_teachers[j])
+del unic
+for j in Shedule1.busy_teachers:
+    print(j, Shedule1.busy_teachers[j])
 
 teacher_time = {}
 cons = 1
