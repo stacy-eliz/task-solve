@@ -8,6 +8,7 @@ path = "app2.xlsx"
 a = application1(path_app1)
 b = Full_teacher(path)  # массив классов преподавателей
 
+
 def shorter(st, f):
     if f:
         for i in range(len(st)):
