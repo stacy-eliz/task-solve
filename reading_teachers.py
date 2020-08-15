@@ -13,17 +13,10 @@ def Full_teacher(path) -> [Teacher]:
   for i in list(set(flatten(pr))):
     NUMBERS_OF_PROGRAMS.append(i)
   del pr
-  teachers = [Teacher()] * sheet.max_row
-  i = 0
-  for row in sheet.iter_rows(min_row=2):
-    teachers[i].number = row[0].value
-    teachers[i].name = row[1].value
-    teachers[i].program = str(row[3].value).split(';')
+  teachers = []
+  for _, row in enumerate(sheet.iter_rows(min_row=2)):
     azaza = []
-    [azaza.append(j) for j in NUMBERS_OF_PROGRAMS if j not in teachers[i].program]
-    teachers[i].antiprogram = azaza
-    del azaza
-    teachers[i].smeni = row[7].value
-    teachers[i].disciplin = row[2].value
-    i+=1
+    [azaza.append(j) for j in NUMBERS_OF_PROGRAMS if j not in str(row[3].value).split(';')]
+    tch = Teacher(row[0].value, row[1].value, str(row[3].value).split(';'), azaza, row[4].value, row[7].value, row[2].value)
+    teachers.append(tch)
   return teachers
