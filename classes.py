@@ -1,15 +1,24 @@
 class Teacher:
-    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None):
+    def __init__(self, number=None, name=None, program=None, antiprogram=None, prioritet=None, smeni=None,
+                 disciplin=None):
         """Constructor"""
         self.number = number
         self.program = program
+        self.disciplin = disciplin
         self.name = name
+        self.prioritet = prioritet
         self.antiprogram = antiprogram
         self.smeni = smeni
+        self.is_busy = 0
+
     def __str__(self):
-        return('Teacher: '+str(self.name))
+        return ('Teacher: ' + str(self.name))
+
     def __repr__(self):
-        return('Teacher: '+str(self.name))
+        return ('Teacher: ' + str(self.name))
+
+    def leave(self):
+        self.is_busy = 0
 
 class ClassRoom:
     
@@ -53,6 +62,10 @@ class Shedule:
     def __init__(self): 
         self.busy_room = {}
         self.rooms = set()
+        self.busy_room = {}
+        self.busy_teachers = {}
+##        self.rooms = []
+        self.teachers = []
     def Add_Room(self, room, date, time, programme_name):
         self.busy_room[(room.name,date)] = [time, programme_name]
         
@@ -74,3 +87,17 @@ class Shedule:
             if not i.is_busy:
                 f.add(i)
         return f
+    def Add_Teacher(self, teacher, date, disciplin, programme_name):
+        self.busy_teachers[(teacher.name, date)] = [disciplin, programme_name]
+
+        self.teachers.append(teacher)
+
+    def __str__(self):
+        return (str(self.busy_room), str(self.busy_teachers))
+
+    def __repr__(self):
+        return (str(self.busy_room), str(self.busy_teachers))
+
+    def leave_teachers(self):
+        for i in self.teachers:
+            i.leave()

@@ -3,22 +3,13 @@ from parser2 import application2_audit, application2_programm
 from parser1 import application1
 from reading_teachers import Full_teacher
 import re
+from reading_teachers import Full_teacher
 
 
 
         
 
 Shedule1 = classes.Shedule()
-def shorter(st):
-##    print(type(st))
-    for i in range(len(st)):
-        if st[i].isnumeric():
-            
-            return st[:i]
-
-
-
-##a = [[0 for i in range(52)] for j in range(8)] #расписание годовое
 path_app1 = "app1.xlsx"
 a = application1(path_app1)
 path = "app2.xlsx"
@@ -26,6 +17,70 @@ b = application2_programm(path) #массив объектов программ
 c = application2_audit(path) #массив объектов аудиторий
 count_free_room_week = 0
 counter_week = 0
+##def shorter(st):
+####    print(type(st))
+##    for i in range(len(st)):
+##        if st[i].isnumeric():
+##            
+##            return st[:i]
+
+
+
+
+
+
+
+
+
+
+##path_app1 = "app1.xlsx"
+##path = "app2.xlsx"
+##a = application1(path_app1)
+##b = Full_teacher(path)
+def shorter(st, f):
+    if f:
+        for i in range(len(st)):
+            if st[i].isnumeric():
+                return st[:i]
+    else:
+        for i in range(len(st)):
+            if st[i].isnumeric():
+                return st[i:][:11]
+
+teachers = Full_teacher('app2.xlsx')
+
+for i in range(1, len(a)):
+    for j in range(len(a[i])):
+        if a[i][j] != None and not 'Неделя' in a[i][j]:
+            if isinstance(a[i][j], list):
+                pass
+            else:
+                for m in teachers:
+                    x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace('Организация пассажирских перевозок', 'Пассажирские перевозки')
+                    if x in a[0][j] or a[0][j] in x:
+                        Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j])
+    Shedule1.leave_teachers()
+
+for i in Shedule1.busy_teachers:
+    print(i)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##a = [[0 for i in range(52)] for j in range(8)] #расписание годовое
+
 ##for i in b:
 ##    print(i.name, i.programme)
 for i in range(1, len(a)):
@@ -33,7 +88,7 @@ for i in range(1, len(a)):
     for j in range(len(a[i])):
         if not(type(a[i][j])is list) and a[i][j]!= None and a[0][j] != None:         
             for k in range(len(b)):
-                d = shorter(a[i][j]).replace("Повышение", "повышения")
+                d = shorter(a[i][j], True).replace("Повышение", "повышения")
                 d = d.lower()
                 if a[0][j].lower() in b[k].name.lower() or b[k].name.lower() in  a[0][j].lower():     
                     if d in b[k].programme.lower() or b[k].programme.lower() in d:
@@ -57,7 +112,7 @@ for i in range(1, len(a)):
         elif type(a[i][j]) is list:
             for g in range(len(a[i][j])):
                 for k in range(len(b)):
-                    d = shorter(a[i][j][g]).replace("Повышение", "повышения")
+                    d = shorter(a[i][j][g], True).replace("Повышение", "повышения")
                     d = d.lower()
                     if a[0][j][g].lower() in b[k].name.lower() or b[k].name.lower() in  a[0][j][g].lower():     
                         if d in b[k].programme.lower() or b[k].programme.lower() in d:
