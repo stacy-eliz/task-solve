@@ -2,7 +2,10 @@ import classes
 from parser2 import application2_audit, application2_programm
 from parser1 import application1
 from reading_teachers import Full_teacher
-from random import shuffle
+import re
+from reading_teachers import Full_teacher
+import matplotlib.pyplot as plt
+import numpy as np
 
 Shedule1 = classes.Shedule()
 path_app1 = "app1.xlsx"
@@ -20,23 +23,28 @@ count_free_room_week = 0
 y1 = []
 y2 = []
 
+y3 = []
+y4 = []
+
 
 def shorter(st, f):
     if f:
+        
         for i in range(len(st)):
             if st[i].isnumeric():
                 return st[:i]
+            
     else:
         for i in range(len(st)):
             if st[i].isnumeric():
                 return st[i:][:11]
+    return st
 
 
 teachers = Full_teacher('app2.xlsx')
 flag = False
 flag2 = False
 count = 0
-unic = []
 for i in range(1, len(a)):
     flag1 = True
     for j in range(len(a[i])):
@@ -44,44 +52,63 @@ for i in range(1, len(a)):
             count += 1
             flag1 = False
         elif a[i][j] != None and not 'Неделя' in a[i][j]:
-            if a[i][j] not in unic:
-                unic.append(a[i][j])
-                if isinstance(a[i][j], list):
-                    # print(a[i][j], count)
-                    for k in a[i][j]:
-                        shuffle(teachers)
-                        for m in teachers:
-                            x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
-                                'Организация пассажирских перевозок', 'Пассажирские перевозки')
-                            if x in a[0][j] or a[0][j] in x:
-                                if not m.is_busy:
-                                    Shedule1.Add_Teacher(m, shorter(k, 0), x, k, count)
-                                    m.is_busy = 1
-                                    flag2 = True
-                                    break
-                        if flag2:
-                            flag2 = False
-                            break
-                else:
-                    shuffle(teachers)
+            if isinstance(a[i][j], list):
+                for k in a[i][j]:
                     for m in teachers:
-                        x = m.disciplin.replace('Управление безопасностью полетов', 'Авиационная безопасность').replace(
+                        x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
                             'Организация пассажирских перевозок', 'Пассажирские перевозки')
                         if x in a[0][j] or a[0][j] in x:
                             if not m.is_busy:
-                                Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j], count)
+                                Shedule1.Add_Teacher(m, shorter(k, 0), x, k, count)
                                 m.is_busy = 1
-                                flag = True
+                                flag2 = True
                                 break
-                    if flag:
-                        flag = False
+                    if flag2:
+                        flag2 = False
                         break
+            else:
+                for m in teachers:
+                    x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
+                        'Организация пассажирских перевозок', 'Пассажирские перевозки')
+                    if x in a[0][j] or a[0][j] in x:
+                        if not m.is_busy:
+                            Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j], count)
+                            m.is_busy = 1
+                            flag = True
+                            break
+                if flag:
+                    flag = False
+                    break
     Shedule1.leave_teachers()
 
-del unic
-for j in Shedule1.busy_teachers:
-    print(j, Shedule1.busy_teachers[j])
+##for j in Shedule1.busy_teachers:
+##    print(j, Shedule1.busy_teachers[j])
 
+teacher_time = {}
+cons = 1
+for j in Shedule1.busy_teachers:
+    
+    n = j[0] #имя препода
+    w = Shedule1.busy_teachers[j][-1] # номер недели   
+    a = Shedule1.busy_teachers[j][-2]
+    a = a.split()
+    print(a[2])
+    if a[2][3:5] != a[2][-2:]:
+            cons += int(a[2][6:8])
+            cons += 30-int(a[2][:2])
+            cons +=1
+    else:
+        cons = int(a[2][6:8])-int(a[2][:2])+1
+    if n in teacher_time:
+        if w in teacher_time[n]:
+            teacher_time[n][w] += cons
+        else:
+            teacher_time[n][w] = cons
+    else:
+        teacher_time[n] = {w:cons}
+print(teacher_time)
+    
+a = application1(path_app1)
 for i in range(1, len(a)):
     counter_weeks += 1
     for j in range(len(a[i])):
@@ -126,8 +153,10 @@ for i in range(1, len(a)):
                                                 Shedule1.swap_rooms(c[l], s, a[i][2])
                                                 break;
                                     else:
+##                                        print("*", a[i])
                                         Shedule1.Add_Room(c[l], a[i][2], None, a[i][j]);
                                 elif h in c[l].differences.lower() and not (c[l].is_busy):
+                                    
                                     Shedule1.Add_Room(c[l], a[i][2], None, a[i][j]);
                                     c[l].is_busy = 1;
                                     break;
@@ -176,3 +205,68 @@ for i in range(1, len(a)):
 
 ##for i in Shedule1.busy_room:
 ##    print(i)
+def graf_tadjyk1(y1):
+    x1 = [i for i in range(1, 27)]
+    y1 = np.array(y1)
+    x1 = np.array(x1)
+    plt.title("Процентные данные загруженности аудиторий на каждые 4 недели")
+    plt.plot(x1, y1)
+    plt.scatter(x1, y1)
+    plt.grid()
+    ##plt.savefig("tadjyk1.png")
+    plt.show()
+
+
+def graf_tadjyk2(y2):
+    x2 = [i for i in range(1, 54)]
+    y2 = np.array(y2)
+    x2 = np.array(x2)
+    plt.title("Процентные данные загруженности аудиторий на каждую неделю")
+    plt.plot(x2, y2)
+    plt.scatter(x2, y2)
+    plt.grid()
+    ##plt.savefig("tadjyk2.png")
+    plt.show()
+
+def graf_tadjyk3():
+    
+##    for i in teacher_time:
+##        x3 = teacher_time[i].keys()
+##        y3 = teacher_time[i].values()
+##        redline = plt.plot(x3,y3, label = "фамилия", color = "red")
+##        fig = plt.gcf()
+####        fig.set_size_inches(18.5, 10.5)
+####        fig.savefig('test2png.png', dpi=100)
+##        plt.legend([redline], i,title="M", fontsize=10, title_fontsize=15, loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5), mode='expand')
+####    x3 = teacher_time["Автеньев Д.Г."].keys()
+####    y3 = teacher_time["Автеньев Д.Г."].values()
+####    plt.plot(x3,y3, label = "фамилия", color = "red")
+
+    lines = []
+    color = []
+    labels = []
+    s = 122222
+    for i in teacher_time:
+        x3 = teacher_time[i].keys()
+        y3 = teacher_time[i].values()
+        
+        labels.append(i)
+        s = "#"+str(s)
+        print(i)
+        a, = plt.plot(x3,y3, color = s)
+        lines.append(a)
+        s = int(s[1:])
+        s+=150
+    print(labels)
+    plt.legend(lines,labels)
+
+    
+    
+    plt.grid()
+    plt.show()
+    
+graf_tadjyk3()
+
+
+##graf_tadjyk1(y1)
+##graf_tadjyk2(y2)
