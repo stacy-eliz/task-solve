@@ -123,6 +123,7 @@ for i in range(1, len(a)):
         if not (type(a[i][j]) is list) and a[i][j] != None and a[0][j] != None:
             for k in range(len(b)):
                 if "Опасные грузы" in a[0][j]:
+                    #####
 
                     cate = a[0][j].replace("Опасные грузы.", "").replace(" категория", "")
                     ##                    print(a[i][j])
