@@ -1,9 +1,8 @@
 class Teacher:
-    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None, disciplin=None):
+    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None):
         """Constructor"""
         self.number = number
         self.program = program
-        self.disciplin = disciplin
         self.name = name
         self.antiprogram = antiprogram
         self.smeni = smeni
@@ -65,3 +64,13 @@ class Shedule:
     def leave_rooms(self):
         for i in self.rooms:
             i.leave()
+    def swap_rooms(self, room1, room2, date1, date2=None):
+        if date2 == None:
+            date2=date1
+        self.busy_room[(room1.name,date1)],self.busy_room[(room2.name,date2)] = self.busy_room[(room2.name,date2)],self.busy_room[(room1.name,date1)]
+    def get_free_rooms(self):
+        f = []
+        for i in self.rooms:
+            if not i.is_busy:
+                f.append(i)
+        return f
