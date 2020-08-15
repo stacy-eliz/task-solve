@@ -32,32 +32,61 @@ for i in range(1, len(a)):
             for k in range(len(b)):
                 d = shorter(a[i][j]).replace("Повышение", "повышения")
                 d = d.lower()
-                if a[0][j].lower() in b[k].name.lower() or b[k].name.lower() in  a[0][j].lower():     
-                    if d in b[k].programme.lower() or b[k].programme.lower() in d:
-                        for l in range(len(c)):
-                            h = b[k].features.lower().replace("требуется ","").replace("нет","")
-##                            print(c[l].name, h)
-                            if str(c[l].name) in h:
-                                
-                                if c[l].is_busy:
-                                    f = Shedule1.get_free_rooms()
-                                    if len(f)!=0:
-                                        print("swaping **** ",c[l], f[0])
-                                        f[0].is_busy=1
-                                        Shedule1.Add_Room(f[0], a[i][2], None, b[k].name)
-                                        Shedule1.swap_rooms(c[l],f[0],a[i][2])
-                                        
-                                        print(Shedule1.busy_room[(c[l].name, a[i][2])], Shedule1.busy_room[(f[0].name, a[i][2])])
-                                        
-                                else:
+                if type(b[k]) not is list:
+                    if a[0][j].lower() in b[k].name.lower() or b[k].name.lower() in  a[0][j].lower():     
+                        if d in b[k].programme.lower() or b[k].programme.lower() in d:
+                            for l in range(len(c)):
+                                h = b[k].features.lower().replace("требуется ","").replace("нет","")
+    ##                            print(c[l].name, h)
+                                if str(c[l].name) in h:
                                     
+                                    if c[l].is_busy:
+                                        f = Shedule1.get_free_rooms()
+                                        if len(f)!=0:
+                                            print("swaping **** ",c[l], f[0])
+                                            f[0].is_busy=1
+                                            Shedule1.Add_Room(f[0], a[i][2], None, b[k].name)
+                                            Shedule1.swap_rooms(c[l],f[0],a[i][2])
+                                            
+                                            print(Shedule1.busy_room[(c[l].name, a[i][2])], Shedule1.busy_room[(f[0].name, a[i][2])])
+                                            
+                                    else:
+                                        
+                                        Shedule1.Add_Room(c[l], a[i][2], None, a[i][j]);
+                                        print("not swap", Shedule1.busy_room[(c[l].name, a[i][2])], c[l].name)
+                                elif h in c[l].differences.lower() and not(c[l].is_busy):  
                                     Shedule1.Add_Room(c[l], a[i][2], None, a[i][j]);
-                                    print("not swap", Shedule1.busy_room[(c[l].name, a[i][2])], c[l].name)
-                            elif h in c[l].differences.lower() and not(c[l].is_busy):  
-                                Shedule1.Add_Room(c[l], a[i][2], None, a[i][j]);
-                                c[l].is_busy = 1;
-                                break;
-                            
+                                    c[l].is_busy = 1;
+                                    break;
+                else:
+                    for g in range(len(b[k])):
+                        if a[0][j].lower() in b[k][g].name.lower() or b[k][g].name.lower() in  a[0][j].lower():     
+                            if d in b[k][g].programme.lower() or b[k].programme.lower() in d:
+                                for l in range(len(c)):
+                                    h = b[k][g].features.lower().replace("требуется ","").replace("нет","")
+        ##                            print(c[l].name, h)
+                                    if str(c[l].name) in h:
+                                        
+                                        if c[l].is_busy:
+                                            f = Shedule1.get_free_rooms()
+                                            if len(f)!=0:
+                                                print("swaping **** ",c[l], f[0])
+                                                f[0].is_busy=1
+                                                Shedule1.Add_Room(f[0], a[i][2], None, b[k][g].name)
+                                                Shedule1.swap_rooms(c[l],f[0],a[i][2])
+                                                
+                                                print(Shedule1.busy_room[(c[l].name, a[i][2])], Shedule1.busy_room[(f[0].name, a[i][2])])
+                                                
+                                        else:
+                                            
+                                            Shedule1.Add_Room(c[l], a[i][2], None, a[i][j]);
+                                            print("not swap", Shedule1.busy_room[(c[l].name, a[i][2])], c[l].name)
+                                    elif h in c[l].differences.lower() and not(c[l].is_busy):  
+                                        Shedule1.Add_Room(c[l], a[i][2], None, a[i][j]);
+                                        c[l].is_busy = 1;
+                                        break;
+                        
+                                
     
     Shedule1.leave_rooms()             
                     
