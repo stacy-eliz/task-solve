@@ -26,6 +26,8 @@ class ClassRoom:
         return('ClassRoom: '+str(self.name))
     def __repr__(self):
         return('ClassRoom: '+str(self.name))
+    def leave(self):
+        self.is_busy = 0
 
 
 class Program:
@@ -50,10 +52,15 @@ class Program:
 class Shedule:
     def __init__(self): 
         self.busy_room = {}
-    def Add_Room(number, date, time, name):
-        self.busy_room[number] = [date, time, name]
+        self.rooms = []
+    def Add_Room(self, room, date, time, programme_name):
+        self.busy_room[(room.name,date)] = [time, programme_name]
+        
+        self.rooms.append(room)
     def __str__(self):
         return(str(self.busy_room ))
     def __repr__(self):
         return(str(self.busy_room ))
-
+    def leave_rooms(self):
+        for i in self.rooms:
+            i.leave()
