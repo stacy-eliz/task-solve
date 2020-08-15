@@ -4,7 +4,7 @@ from classes import Teacher
 def Full_teacher(path) -> [Teacher]:
   xlsx_file = Path(path)
   wb_obj = openpyxl.load_workbook(xlsx_file)
-  sheet = wb_obj.active
+  sheet = wb_obj['параметры преподавателей']
   pr = []
   NUMBERS_OF_PROGRAMS = []
   for row in sheet.iter_rows(min_row=2):
