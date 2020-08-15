@@ -29,10 +29,12 @@ class ClassRoom:
         self.name = name
         self.places = places
         self.type_of_discipline = type_of_discipline
+        self.type_of_programm = None
         self.differences = differences
         self.prioritet_discipline = prioritet_discipline
         self.anti_discipline = anti_discipline
         self.is_busy = 0
+        
 
     def __str__(self):
         return ('ClassRoom: ' + str(self.name))
@@ -76,8 +78,8 @@ class Shedule:
         self.busy_teachers = {}
         self.teachers = set()
 
-    def Add_Room(self, room, date, time, programme_name):
-        self.busy_room[(room.name, date)] = [time, programme_name]
+    def Add_Room(self, room, date, time, programme_name,type_programm):
+        self.busy_room[(room.name, date)] = [time, programme_name, type_programm]
 
         self.rooms.add(room)
 
