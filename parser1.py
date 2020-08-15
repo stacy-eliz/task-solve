@@ -1,8 +1,8 @@
 import openpyxl
 
-def application1(path):
 
-    wb = openpyxl.load_workbook(path) #'Приложение №1.xlsx'
+def application1(path):
+    wb = openpyxl.load_workbook(path)  # 'Приложение №1.xlsx'
 
     direction = []
     weeks = []
@@ -21,10 +21,28 @@ def application1(path):
             if j.value != None:
                 x = str(j.value).replace('\n', ' ').strip()
                 if not x.isupper() and x[0].isalpha():
-                    if 'ауд.' in x:
+                    if x.count('ауд.') == 1:
                         y = x.find('ауд.')
                         x = x[:y + 4]
-                    weeks[-1].append(x)
+                        weeks[-1].append(x)
+                    elif x.count('ауд.') > 1:
+                        k = x.split()
+                        x = ['']
+                        flag = False
+                        for m in k:
+                            if m == 'ауд.':
+                                flag = True
+                                x[-1] += m + ' '
+                                x.append('')
+                            elif flag:
+                                flag = False
+                            else:
+                                x[-1] += m + ' '
+                        for m in range(len(x) - 1):
+                            x[m] = x[m].strip()
+                        weeks[-1].append(x[:-1])
+                    else:
+                        weeks[-1].append(x)
                 else:
                     weeks[-1].append(None)
             else:
