@@ -3,9 +3,9 @@ from parser2 import application2_audit, application2_programm
 from parser1 import application1
 from reading_teachers import Full_teacher
 import re
-from reading_teachers import Full_teacher
 import matplotlib.pyplot as plt
 import numpy as np
+from random import shuffle
 
 Shedule1 = classes.Shedule()
 path_app1 = "app1.xlsx"
