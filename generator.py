@@ -6,6 +6,11 @@ import re
 from reading_teachers import Full_teacher
 import matplotlib.pyplot as plt
 import numpy as np
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QButtonGroup
+from PyQt5.QtGui import QPainter, QPen, QIcon, QPixmap, QRegExpValidator
+from PyQt5.QtCore import Qt, QRegExp
+# from design import Ui_MainWindow
+from random import shuffle
 
 Shedule1 = classes.Shedule()
 path_app1 = "app1.xlsx"
@@ -39,6 +44,7 @@ teachers = Full_teacher('app2.xlsx')
 flag = False
 flag2 = False
 count = 0
+unic = []
 for i in range(1, len(a)):
     flag1 = True
     for j in range(len(a[i])):
@@ -46,35 +52,41 @@ for i in range(1, len(a)):
             count += 1
             flag1 = False
         elif a[i][j] != None and not 'Неделя' in a[i][j]:
-            if isinstance(a[i][j], list):
-                for k in a[i][j]:
+            if a[i][j] not in unic:
+                unic.append(a[i][j])
+                if isinstance(a[i][j], list):
+                    # print(a[i][j], count)
+                    for k in a[i][j]:
+                        shuffle(teachers)
+                        for m in teachers:
+                            x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
+                                'Организация пассажирских перевозок', 'Пассажирские перевозки')
+                            if x in a[0][j] or a[0][j] in x:
+                                if not m.is_busy:
+                                    Shedule1.Add_Teacher(m, shorter(k, 0), x, k, count)
+                                    m.is_busy = 1
+                                    flag2 = True
+                                    break
+                        if flag2:
+                            flag2 = False
+                            break
+                else:
+                    shuffle(teachers)
                     for m in teachers:
-                        x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
+                        x = m.disciplin.replace('Управление безопасностью полетов', 'Авиационная безопасность').replace(
                             'Организация пассажирских перевозок', 'Пассажирские перевозки')
                         if x in a[0][j] or a[0][j] in x:
                             if not m.is_busy:
-                                Shedule1.Add_Teacher(m, shorter(k, 0), x, k, count)
+                                Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j], count)
                                 m.is_busy = 1
-                                flag2 = True
+                                flag = True
                                 break
-                    if flag2:
-                        flag2 = False
+                    if flag:
+                        flag = False
                         break
-            else:
-                for m in teachers:
-                    x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
-                        'Организация пассажирских перевозок', 'Пассажирские перевозки')
-                    if x in a[0][j] or a[0][j] in x:
-                        if not m.is_busy:
-                            Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j], count)
-                            m.is_busy = 1
-                            flag = True
-                            break
-                if flag:
-                    flag = False
-                    break
     Shedule1.leave_teachers()
 
+del unic
 for j in Shedule1.busy_teachers:
     print(j, Shedule1.busy_teachers[j])
 
@@ -181,7 +193,7 @@ def graf_tadjyk1(y1):
     plt.scatter(x1, y1)
     plt.grid()
     ##plt.savefig("tadjyk1.png")
-    plt.show()
+    # plt.show()
 
 
 def graf_tadjyk2(y2):
@@ -193,8 +205,24 @@ def graf_tadjyk2(y2):
     plt.scatter(x2, y2)
     plt.grid()
     ##plt.savefig("tadjyk2.png")
-    plt.show()
+    # plt.show()
 
 
 graf_tadjyk1(y1)
 graf_tadjyk2(y2)
+
+# class MyWindow(QMainWindow):
+#
+#     def __init__(self):
+#         super(MyWindow, self).__init__()
+#         self.ui = Ui_MainWindow()
+#         self.ui.setupUi(self)
+#         self.update()
+#
+# app = QApplication([])
+# application = MyWindow()
+# # application.setWindowTitle('')
+# # application.setWindowIcon(QIcon('.\images\icon.ico'))
+# application.show()
+#
+# exit(app.exec())
