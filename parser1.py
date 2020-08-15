@@ -41,6 +41,8 @@ def application1(path):
                         for m in range(len(x) - 1):
                             x[m] = x[m].strip()
                         weeks[-1].append(x[:-1])
+                    else:
+                        weeks[-1].append(x)
                 else:
                     weeks[-1].append(None)
             else:
@@ -50,3 +52,4 @@ def application1(path):
     weeks.insert(0, direction)
     weeks[0] = weeks[0][42:]
     return weeks
+
