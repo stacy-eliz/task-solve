@@ -1,16 +1,17 @@
 class Teacher:
-    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None):
+    def __init__(self, number=None, name=None, program=None, antiprogram = None, prioritet = None, smeni = None, disciplin=None):
         """Constructor"""
         self.number = number
         self.program = program
+        self.disciplin = disciplin
         self.name = name
+        self.prioritet = prioritet
         self.antiprogram = antiprogram
         self.smeni = smeni
     def __str__(self):
         return('Teacher: '+str(self.name))
     def __repr__(self):
         return('Teacher: '+str(self.name))
-
 class ClassRoom:
     
     def __init__(self, name=None, places=None, type_of_discipline=None, differences=None, prioritet_discipline=None, anti_discipline=None):
