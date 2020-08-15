@@ -25,22 +25,47 @@ def shorter(st, f):
 
 
 teachers = Full_teacher('app2.xlsx')
-
+flag = False
+flag2 = False
+count = 0
 for i in range(1, len(a)):
+    flag1 = True
     for j in range(len(a[i])):
-        if a[i][j] != None and not 'Неделя' in a[i][j]:
+        if flag1 and a[i][j] != None and 'Неделя' in a[i][j]:
+            count += 1
+            flag1 = False
+        elif a[i][j] != None and not 'Неделя' in a[i][j]:
             if isinstance(a[i][j], list):
-                pass
+                for k in a[i][j]:
+                    for m in teachers:
+                        x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
+                            'Организация пассажирских перевозок', 'Пассажирские перевозки')
+                        if x in a[0][j] or a[0][j] in x:
+                            if not m.is_busy:
+                                Shedule1.Add_Teacher(m, shorter(k, 0), x, k, count)
+                                m.is_busy = 1
+                                flag2 = True
+                                break
+                    if flag2:
+                        flag2 = False
+                        break
             else:
                 for m in teachers:
                     x = m.disciplin.replace('Управление безопасностью полетов', 'Безопасность полетов').replace(
                         'Организация пассажирских перевозок', 'Пассажирские перевозки')
                     if x in a[0][j] or a[0][j] in x:
-                        Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j])
+                        if not m.is_busy:
+                            Shedule1.Add_Teacher(m, shorter(a[i][j], 0), x, a[i][j], count)
+                            m.is_busy = 1
+                            flag = True
+                            break
+                if flag:
+                    flag = False
+                    break
     Shedule1.leave_teachers()
 
-for i in Shedule1.busy_teachers:
-    print(i)
+for j in Shedule1.busy_teachers:
+    print(j, Shedule1.busy_teachers[j])
 
 for i in range(1, len(a)):
     counter_week += 1

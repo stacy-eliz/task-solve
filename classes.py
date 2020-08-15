@@ -73,10 +73,8 @@ class Shedule:
     def __init__(self):
         self.busy_room = {}
         self.rooms = set()
-        self.busy_room = {}
         self.busy_teachers = {}
-        ##        self.rooms = []
-        self.teachers = []
+        self.teachers = set()
 
     def Add_Room(self, room, date, time, programme_name):
         self.busy_room[(room.name, date)] = [time, programme_name]
@@ -106,10 +104,10 @@ class Shedule:
                 f.add(i)
         return f
 
-    def Add_Teacher(self, teacher, date, disciplin, programme_name):
-        self.busy_teachers[(teacher.name, date)] = [disciplin, programme_name]
+    def Add_Teacher(self, teacher, date, disciplin, programme_name, count_week):
+        self.busy_teachers[(teacher.name, date)] = [disciplin, programme_name, count_week]
 
-        self.teachers.append(teacher)
+        self.teachers.add(teacher)
 
     def __str__(self):
         return (str(self.busy_room), str(self.busy_teachers))
