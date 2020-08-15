@@ -2,7 +2,9 @@ from PyQt5.QtWidgets import QMainWindow, QApplication
 from design import Ui_MainWindow
 import matplotlib.pyplot as plt
 import numpy as np
-from generator import y1, y2
+from generator import y1, y2, teacher_time
+from random import choice
+
 
 class MyWindow(QMainWindow):
 
@@ -16,6 +18,7 @@ class MyWindow(QMainWindow):
     def initUI1(self):
         self.ui.audit_month.clicked.connect(lambda: self.graf_tadjyk1(y1))
         self.ui.audit_week.clicked.connect(lambda: self.graf_tadjyk2(y2))
+        self.ui.teach_week.clicked.connect(lambda: self.graf_tadjyk3())
 
     def graf_tadjyk1(self, y1):
         x1 = [i for i in range(1, 27)]
@@ -39,8 +42,27 @@ class MyWindow(QMainWindow):
         # plt.savefig("tadjyk2.png")
         plt.show()
 
+    def graf_tadjyk3(self):
+        lines = []
+        labels = []
+        number_of_colors = len(teacher_time)
 
-app = QApplication([y1, y2])
+        color = ["#" + ''.join([choice('0123456789ABCDEF') for j in range(6)])
+                 for i in range(number_of_colors)]
+        for j, i in enumerate(teacher_time):
+            x3 = teacher_time[i].keys()
+            y3 = teacher_time[i].values()
+            labels.append(i)
+            a, = plt.plot(x3, y3, color=color[j])
+            lines.append(a)
+        plt.legend(lines, labels)
+
+        plt.grid()
+        # plt.savefig("tadjyk3.png")
+        plt.show()
+
+
+app = QApplication([y1, y2, teacher_time])
 application = MyWindow()
 application.setWindowTitle('Графики')
 # application.setWindowIcon(QIcon('.\images\icon.ico'))
