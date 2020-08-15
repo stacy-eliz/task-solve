@@ -16,7 +16,7 @@
 
 Мы распарсили исходные таблички с данными и заполнили информацию для соответствующих классов `Teacher`, `ClassRoom`, `Schedule`, `Program`. 
 
-Весь процесс парсинга с комментариями представлен в `parser1.py`, `reading_teachers.py`, `parser2.py`.
+Весь процесс парсинга с комментариями представлен в **[`parser1.py`](https://github.com/stacy-eliz/task-solve/blob/master/parser1.py), [`reading_teachers.py`](https://github.com/stacy-eliz/task-solve/blob/master/reading_teachers.py), [`parser2.py`](https://github.com/stacy-eliz/task-solve/blob/master/parser2.py)**.
 
 **Классы**
 
@@ -24,7 +24,7 @@
 
 Все классы, их атрибуты, конструкторы и функции подробно описаны в комментариях.
 
-Файл [`classes.py`](https://github.com/stacy-eliz/task-solve/blob/master/classes.py)
+Файл **[`classes.py`](https://github.com/stacy-eliz/task-solve/blob/master/classes.py)**
 
 
 **Генератор**
@@ -32,7 +32,7 @@
 
 Для создания расписания мы написали генератор, который учитывает все исходные ограничения, и выдает на выходе список с расставленными программами, преподами, аудиториями и т.д.
 
-Он находится в соответствующем файле `generator.py`. Сначала происходит итерация по неделям, затем по программам, а потом по преподавателям. 
+Он находится в соответствующем файле **[`generator.py`](https://github.com/stacy-eliz/task-solve/blob/master/generator.py)**. Сначала происходит итерация по неделям, затем по программам, а потом по преподавателям. 
 
 Полная информация по коду указана в комментариях.
 
