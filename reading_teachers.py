@@ -16,7 +16,6 @@ def Full_teacher(path) -> [Teacher]:
   teachers = [Teacher()] * sheet.max_row
   i = 0
   for row in sheet.iter_rows(min_row=2):
-    antipr = NUMBERS_OF_PROGRAMS
     teachers[i].number = row[0].value
     teachers[i].name = row[1].value
     teachers[i].program = str(row[3].value).split(';')
@@ -25,5 +24,6 @@ def Full_teacher(path) -> [Teacher]:
     teachers[i].antiprogram = azaza
     del azaza
     teachers[i].smeni = row[7].value
+    teachers[i].disciplin = row[2].value
     i+=1
   return teachers
