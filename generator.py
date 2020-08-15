@@ -1,6 +1,6 @@
 import classes
 from parser2 import application2_audit, application2_programm
-from parser1 import application1
+from parser1_1 import application1
 from reading_teachers import Full_teacher
 import re
 
