@@ -24,7 +24,7 @@
 
 Все классы, их атрибуты, конструкторы и функции подробно описаны в комментариях.
 
-Файл [`classes.py`](https://github.com/stacy-eliz/task-solve/classes.py)
+Файл [`classes.py`](https://github.com/stacy-eliz/task-solve/blob/master/classes.py)
 
 
 **Генератор**
