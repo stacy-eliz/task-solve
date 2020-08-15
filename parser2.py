@@ -31,7 +31,7 @@ def application2_programm(path):
     programms = []
     sheet = wb['параметры программ']
     out = sheet['B2'].value
-    for i in range(2, 42):
+    for i in range(2, 41):
         x_ = sheet['B{}'.format(i)].value
         if x_:
             out = x_.replace('\n', ' ')
