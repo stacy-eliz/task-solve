@@ -3,19 +3,20 @@ from parser2 import application2_audit, application2_programm
 from parser1 import application1
 from reading_teachers import Full_teacher
 from random import shuffle
-from openpyxl import Workbook
 from openpyxl import load_workbook
-import numpy as np
-import matplotlib.pyplot as plt
+
 wb = load_workbook("output.xlsx")
 ws1 = wb["ДПО"]
-def room_xls(l,s, st):
-    if s!=0:
-        audit = st + " "+ str(s.name)       
-        ws1.cell(row=l[1]+1, column=l[0]+7,value=audit)
+
+
+def room_xls(l, s, st):
+    if s != 0:
+        audit = st + " " + str(s.name)
+        ws1.cell(row=l[1] + 1, column=l[0] + 7, value=audit)
+
+
 def save():
     wb.save("output.xlsx")
-
 
 
 Shedule1 = classes.Shedule()
@@ -138,8 +139,8 @@ for i in range(1, len(a)):
                             if len(f) != 0:
                                 for s in f:
                                     s.is_busy = 1
-                                    Shedule1.Add_Room(s, a[i][2], None, b[k].programme,[i,j])
-                                    room_xls([i,j], s, a[i][j])
+                                    Shedule1.Add_Room(s, a[i][2], None, b[k].programme, [i, j])
+                                    room_xls([i, j], s, a[i][j])
                                     break
 
 
@@ -156,17 +157,17 @@ for i in range(1, len(a)):
                                         if len(f) != 0:
                                             for s in f:
                                                 s.is_busy = 1
-                                                Shedule1.Add_Room(s, a[i][2], None, b[k].programme,[i,j])
+                                                Shedule1.Add_Room(s, a[i][2], None, b[k].programme, [i, j])
                                                 Shedule1.swap_rooms(c[l], s, a[i][2])
-                                                room_xls([i,j], s, a[i][j])
+                                                room_xls([i, j], s, a[i][j])
                                                 break
                                     else:
-                                        Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i,j])
-                                        room_xls([i,j], s, a[i][j])
+                                        Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i, j])
+                                        room_xls([i, j], s, a[i][j])
                                 elif h in c[l].differences.lower() and not (c[l].is_busy):
 
-                                    Shedule1.Add_Room(c[l], a[i][2], None,  b[k].programme,[i,j])
-                                    room_xls([i,j], s, a[i][j])
+                                    Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i, j])
+                                    room_xls([i, j], s, a[i][j])
                                     c[l].is_busy = 1
                                     break
         elif type(a[i][j]) is list:
@@ -184,16 +185,16 @@ for i in range(1, len(a)):
                                         if len(f) != 0:
                                             for s in f:
                                                 s.is_busy = 1
-                                                Shedule1.Add_Room(s, a[i][2], None, b[k].programme,[i,j])
+                                                Shedule1.Add_Room(s, a[i][2], None, b[k].programme, [i, j])
                                                 Shedule1.swap_rooms(c[l], s, a[i][2])
-                                                room_xls([i,j], s, "")
+                                                room_xls([i, j], s, "")
                                                 break
                                     else:
-                                        Shedule1.Add_Room(c[l], a[i][2], None,b[k].programme, [i,j])
-                                        room_xls([i,j], s, "")
+                                        Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i, j])
+                                        room_xls([i, j], s, "")
                                 elif h in c[l].differences.lower() and not (c[l].is_busy):
-                                    Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i,j])
-                                    room_xls([i,j], s, "")
+                                    Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i, j])
+                                    room_xls([i, j], s, "")
                                     c[l].is_busy = 1
                                     break
 
@@ -210,32 +211,3 @@ for i in range(1, len(a)):
     Shedule1.leave_rooms()
 
 save()
-
-def graf4():
-    x4 = [l for l in range(1,14)]
-    y4 = []
-    k = 0
-    for i in range(1,54):       
-        if i%4!=0:
-            for j in teacher_time:
-                if i in teacher_time[j]:
-                    k+=teacher_time[j][i]
-##                lables.append(teacher_time[j])
-        else:
-            
-            y4.append(k)
-            k = 0
-    y4 = np.array(y4)
-    x4 = np.array(x4)
-    plt.plot(x4,y4)
-    plt.grid()
-    plt.scatter(x4, y4)
-    plt.show()
-        
-        
-    print(y4)          
-graf4()
-
-    
-
-
