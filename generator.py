@@ -11,7 +11,13 @@ ws1 = wb["ДПО"]
 
 def room_xls(l, s, st):
     if s != 0:
-        audit = st + " " + str(s.name)
+        
+        x = st.find("ауд.")
+##        print(st, len(st), x)
+        audit = st[:x]+ " ауд. " + str(s.name)+st[x+4:]
+##        print(st[x+4:])
+##        audit = st + " " + str(s.name)
+##        print("audit = ", audit)
         ws1.cell(row=l[1] + 1, column=l[0] + 7, value=audit)
 
 
@@ -101,28 +107,11 @@ del unic
 # for j in Shedule1.busy_teachers:
 #     print(j, Shedule1.busy_teachers[j])
 
-teacher_time = {}
-cons = 1
-for j in Shedule1.busy_teachers:
-    n = j[0]  # имя препода
-    w = Shedule1.busy_teachers[j][-1]  # номер недели
-    a = Shedule1.busy_teachers[j][-2]
-    a = a.split()
-    if a[2][3:5] != a[2][-2:]:
-        cons += int(a[2][6:8])
-        cons += 30 - int(a[2][:2])
-        cons += 1
-    else:
-        cons = int(a[2][6:8]) - int(a[2][:2]) + 1
-    if n in teacher_time:
-        if w in teacher_time[n]:
-            teacher_time[n][w] += cons
-        else:
-            teacher_time[n][w] = cons
-    else:
-        teacher_time[n] = {w: cons}
 
-a = application1(path_app1)
+
+##a = application1(path_app1)
+##for i in a:
+##    print(i)
 for i in range(1, len(a)):
     counter_weeks += 1
     for j in range(len(a[i])):
@@ -187,14 +176,14 @@ for i in range(1, len(a)):
                                                 s.is_busy = 1
                                                 Shedule1.Add_Room(s, a[i][2], None, b[k].programme, [i, j])
                                                 Shedule1.swap_rooms(c[l], s, a[i][2])
-                                                room_xls([i, j], s, "")
+                                                room_xls([i, j], s, a[i][j][g])
                                                 break
                                     else:
                                         Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i, j])
-                                        room_xls([i, j], s, "")
+                                        room_xls([i, j], s, a[i][j][g])
                                 elif h in c[l].differences.lower() and not (c[l].is_busy):
                                     Shedule1.Add_Room(c[l], a[i][2], None, b[k].programme, [i, j])
-                                    room_xls([i, j], s, "")
+                                    room_xls([i, j], s, a[i][j][g])
                                     c[l].is_busy = 1
                                     break
 
@@ -209,5 +198,26 @@ for i in range(1, len(a)):
         count_free_room_weeks = 0
 
     Shedule1.leave_rooms()
+
+teacher_time = {}
+cons = 1
+for j in Shedule1.busy_teachers:
+    n = j[0]  # имя препода
+    w = Shedule1.busy_teachers[j][-1]  # номер недели
+    a = Shedule1.busy_teachers[j][-2]
+    a = a.split()
+    if a[2][3:5] != a[2][-2:]:
+        cons += int(a[2][6:8])
+        cons += 30 - int(a[2][:2])
+        cons += 1
+    else:
+        cons = int(a[2][6:8]) - int(a[2][:2]) + 1
+    if n in teacher_time:
+        if w in teacher_time[n]:
+            teacher_time[n][w] += cons
+        else:
+            teacher_time[n][w] = cons
+    else:
+        teacher_time[n] = {w: cons}
 
 save()
