@@ -19,6 +19,7 @@ class MyWindow(QMainWindow):
         self.ui.audit_month.clicked.connect(lambda: self.graf_tadjyk1(y1))
         self.ui.audit_week.clicked.connect(lambda: self.graf_tadjyk2(y2))
         self.ui.teach_week.clicked.connect(lambda: self.graf_tadjyk3())
+        self.ui.teach_month.clicked.connect(lambda: self.graf_tadjyk4())
 
     def graf_tadjyk1(self, y1):
         x1 = [i for i in range(1, 27)]
@@ -49,6 +50,7 @@ class MyWindow(QMainWindow):
 
         color = ["#" + ''.join([choice('0123456789ABCDEF') for j in range(6)])
                  for i in range(number_of_colors)]
+        plt.title("Количество преподавателей в каждую неделю")
         for j, i in enumerate(teacher_time):
             x3 = teacher_time[i].keys()
             y3 = teacher_time[i].values()
@@ -59,6 +61,26 @@ class MyWindow(QMainWindow):
 
         plt.grid()
         # plt.savefig("tadjyk3.png")
+        plt.show()
+
+    def graf_tadjyk4(self):
+        x4 = [l for l in range(1, 14)]
+        y4 = []
+        k = 0
+        for i in range(1, 54):
+            if i % 4 != 0:
+                for j in teacher_time:
+                    if i in teacher_time[j]:
+                        k += teacher_time[j][i]
+            else:
+                y4.append(k)
+                k = 0
+        y4 = np.array(y4)
+        x4 = np.array(x4)
+        plt.title("Количество пар у преподавателей в месяц")
+        plt.plot(x4, y4)
+        plt.grid()
+        plt.scatter(x4, y4)
         plt.show()
 
 
