@@ -5,6 +5,8 @@ from reading_teachers import Full_teacher
 from random import shuffle
 from openpyxl import load_workbook
 
+
+
 wb = load_workbook("output.xlsx")
 ws1 = wb["ДПО"]
 
