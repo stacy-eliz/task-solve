@@ -79,6 +79,8 @@
 
 При запуске **[`save_xls.py`]**(https://github.com/stacy-eliz/task-solve/blob/master/save_xls.py) изменяется файл **`output.xlsx`** таким образом, что в него добавляются преподаватели в соответствии со своими параметрами и годовым расписанием.
 
+![](./img/prepod.png)
+
 
 
 # Заключение
