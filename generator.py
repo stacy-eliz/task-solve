@@ -5,6 +5,8 @@ from reading_teachers import Full_teacher
 from random import shuffle
 from openpyxl import Workbook
 from openpyxl import load_workbook
+import numpy as np
+import matplotlib.pyplot as plt
 wb = load_workbook("output.xlsx")
 ws1 = wb["ДПО"]
 def room_xls(l,s, st):
@@ -208,11 +210,32 @@ for i in range(1, len(a)):
     Shedule1.leave_rooms()
 
 save()
-##for i in Shedule1.busy_room:
-##    print("1")
-##    print(i, Shedule1.busy_room[i])
-##print(len(Shedule1.busy_room))
-##print(len(Shedule1.busy_teachers))
+
+def graf4():
+    x4 = [l for l in range(1,14)]
+    y4 = []
+    k = 0
+    for i in range(1,54):       
+        if i%4!=0:
+            for j in teacher_time:
+                if i in teacher_time[j]:
+                    k+=teacher_time[j][i]
+##                lables.append(teacher_time[j])
+        else:
+            
+            y4.append(k)
+            k = 0
+    y4 = np.array(y4)
+    x4 = np.array(x4)
+    plt.plot(x4,y4)
+    plt.grid()
+    plt.scatter(x4, y4)
+    plt.show()
+        
+        
+    print(y4)          
+graf4()
+
     
 
 
