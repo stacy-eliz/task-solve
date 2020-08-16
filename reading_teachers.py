@@ -2,7 +2,7 @@ import openpyxl
 from pathlib import Path
 from classes import Teacher
 
-
+#####парсинг xlsx файла и заполнение массива учителей полученной информации######
 def Full_teacher(path) -> [Teacher]:
     xlsx_file = Path(path)
     wb_obj = openpyxl.load_workbook(xlsx_file)

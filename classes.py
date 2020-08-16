@@ -1,3 +1,4 @@
+#####Описание класса преподавателя######
 class Teacher:
     def __init__(self, number=None, name=None, program=None, antiprogram=None, prioritet=None, smeni=None,
                  disciplin=None):
@@ -19,8 +20,10 @@ class Teacher:
 
     def leave(self):
         self.is_busy = 0
+####################
 
 
+###############описание класса аудиторий###############
 class ClassRoom:
 
     def __init__(self, name=None, places=None, type_of_discipline=None, differences=None, prioritet_discipline=None,
@@ -44,8 +47,9 @@ class ClassRoom:
 
     def leave(self):
         self.is_busy = 0
+####################
 
-
+###########описание класса программ с дисциплинами#############
 class Program:
     def __init__(self, number_of_program=None, name=None, programme=None, features=None, hours=None, hours_proizv=None,
                  hours_distant=None, day_offline=None, count_of_groups=None, count_of_worker=None,
@@ -69,54 +73,63 @@ class Program:
 
     def __repr__(self):
         return ('Programm: ' + str(self.name) + ' Hourse: ' + str(self.hours))
-
-
+########################################
+    
+###############описание класса расписания#########################
 class Shedule:
     def __init__(self):
         self.busy_room = {}
         self.rooms = set()
         self.busy_teachers = {}
         self.teachers = set()
-
+    ###добавление заполненной комнаты#####
     def Add_Room(self, room, date, time, programme_name,type_programm):
         self.busy_room[(room.name, date)] = [time, programme_name, type_programm]
 
         self.rooms.add(room)
-
+    #########
     def __str__(self):
         return (str(self.busy_room))
 
     def __repr__(self):
         return (str(self.busy_room))
-
+    ######освобождение комнат########
     def leave_rooms(self):
         for i in self.rooms:
             i.leave()
-
+    ################
+    ###############
     def swap_rooms(self, room1, room2, date1, date2=None):
         if date2 == None:
             date2 = date1
         self.busy_room[(room1.name, date1)], self.busy_room[(room2.name, date2)] = self.busy_room[(room2.name, date2)], \
                                                                                    self.busy_room[(room1.name, date1)]
+    #######обмен комнатами между парами#########
 
+        
+    ####получить список свободных комнат######
     def get_free_rooms(self):
         f = set()
         for i in self.rooms:
             if not i.is_busy:
                 f.add(i)
         return f
-
+    ###########
+    
+    #####добавление преподавателя в словарь, где хранятся дисциплина, программа, номер недели########
     def Add_Teacher(self, teacher, date, disciplin, programme_name, count_week):
         self.busy_teachers[(teacher.name, date)] = [disciplin, programme_name, count_week]
 
         self.teachers.add(teacher)
-
+    #################
     def __str__(self):
         return (str(self.busy_room), str(self.busy_teachers))
 
     def __repr__(self):
         return (str(self.busy_room), str(self.busy_teachers))
-
+    ####Освобождение учителей по окончанию недели#####
     def leave_teachers(self):
         for i in self.teachers:
             i.leave()
+    ########
+#####################################

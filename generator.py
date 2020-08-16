@@ -8,27 +8,26 @@ from openpyxl import load_workbook
 wb = load_workbook("output.xlsx")
 ws1 = wb["ДПО"]
 
-
+########Запись ячейки в файл ########
 def room_xls(l, s, st):
-    if s != 0:
-        
+    if s != 0:  
         x = st.find("ауд.")
-##        print(st, len(st), x)
         audit = st[:x]+ " ауд. " + str(s.name)+st[x+4:]
-##        print(st[x+4:])
-##        audit = st + " " + str(s.name)
-##        print("audit = ", audit)
         ws1.cell(row=l[1] + 1, column=l[0] + 7, value=audit)
+####################
 
 
+###Сохранение измененного файла#######
 def save():
     wb.save("output.xlsx")
-
+#######################3
 
 Shedule1 = classes.Shedule()
 path_app1 = "app1.xlsx"
+##path_app1 = "output.xlsx"
 a = application1(path_app1)
 path = "app2.xlsx"
+
 b = application2_programm(path)  # массив объектов программ
 c = application2_audit(path)  # массив объектов аудиторий
 s = 0
@@ -45,6 +44,7 @@ y3 = []
 y4 = []
 
 
+##########Функция обрезания строки#############
 def shorter(st, f):
     if f:
         for i in range(len(st)):
@@ -55,9 +55,11 @@ def shorter(st, f):
             if st[i].isnumeric():
                 return st[i:][:11]
     return st
+###############################################
 
+teachers = Full_teacher('app2.xlsx') ##чтение фала "Приложение№2" и заполнение массива учителей
 
-teachers = Full_teacher('app2.xlsx')
+######################Составление расписания учителей#########################
 flag = False
 flag2 = False
 count = 0
@@ -104,14 +106,10 @@ for i in range(1, len(a)):
     Shedule1.leave_teachers()
 
 del unic
-# for j in Shedule1.busy_teachers:
-#     print(j, Shedule1.busy_teachers[j])
+##########################################################################
 
 
-
-##a = application1(path_app1)
-##for i in a:
-##    print(i)
+###################Составление расписания, анализ данных о парах в месяц/неделю###################################
 for i in range(1, len(a)):
     counter_weeks += 1
     for j in range(len(a[i])):
@@ -186,8 +184,8 @@ for i in range(1, len(a)):
                                     room_xls([i, j], s, a[i][j][g])
                                     c[l].is_busy = 1
                                     break
-
-    if i % 2 == 0:
+    ######Анализ данных для графиков##########
+    if i % 2 == 0:  
         count_free_room_week = len(Shedule1.get_free_rooms())
         y2.append(count_free_room_week / 11 * 100)
 
@@ -196,9 +194,13 @@ for i in range(1, len(a)):
         y1.append(count_free_room_weeks / 44 * 100)
         counter_weeks = 0
         count_free_room_weeks = 0
+    #################
 
     Shedule1.leave_rooms()
+###################################################
 
+
+#############Анализ данных для графиков##################
 teacher_time = {}
 cons = 1
 for j in Shedule1.busy_teachers:
@@ -219,5 +221,5 @@ for j in Shedule1.busy_teachers:
             teacher_time[n][w] = cons
     else:
         teacher_time[n] = {w: cons}
-
+#############################
 save()

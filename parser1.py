@@ -1,6 +1,6 @@
 import openpyxl
 
-
+############парсинг листов в файле "Приложение1", заполнение данных############
 def application1(path):
     wb = openpyxl.load_workbook(path)  # 'Приложение №1.xlsx'
 

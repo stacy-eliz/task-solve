@@ -7,20 +7,25 @@ from random import choice
 
 
 class MyWindow(QMainWindow):
-
+    ########инициализация окна######
     def __init__(self):
         super(MyWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.initUI1()
         self.update()
+    ###############################
 
+    ###########настройка сигналов#####################
     def initUI1(self):
         self.ui.audit_month.clicked.connect(lambda: self.graf_tadjyk1(y1))
         self.ui.audit_week.clicked.connect(lambda: self.graf_tadjyk2(y2))
         self.ui.teach_week.clicked.connect(lambda: self.graf_tadjyk3())
         self.ui.teach_month.clicked.connect(lambda: self.graf_tadjyk4())
+    ###############################
 
+        
+    #########функции создания графиков########################
     def graf_tadjyk1(self, y1):
         x1 = [i for i in range(1, 27)]
         y1 = np.array(y1)
@@ -82,7 +87,7 @@ class MyWindow(QMainWindow):
         plt.grid()
         plt.scatter(x4, y4)
         plt.show()
-
+    #####################################################
 
 app = QApplication([y1, y2, teacher_time])
 application = MyWindow()

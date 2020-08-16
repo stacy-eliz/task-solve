@@ -1,6 +1,6 @@
 import openpyxl
 import classes
-
+####пасрсинг листов из файла "Приложения2" и заполнение соответсвующих данных####
 
 def application2_audit(path):
     wb = openpyxl.load_workbook(path)  # 'Приложение №2.xlsx'
