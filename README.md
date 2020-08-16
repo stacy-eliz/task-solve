@@ -8,6 +8,8 @@
 
 [***Визуализация***](https://github.com/stacy-eliz/task-solve#визуализация)
 
+[***How to use***](https://github.com/stacy-eliz/task-solve#howtouse)
+
 [***Заключение***](https://github.com/DmitryIo/animebot#заключение)
 
 # Реализация
@@ -53,8 +55,21 @@
 
 ![](./img/tadjyk3.png)
 
+# How to use
+
+Для того чтобы запустить десктопное приложение, необходимо запустить файл [`graph.py`](https://github.com/stacy-eliz/task-solve/blob/master/graph.py) 
+
+Интерфейс выглядит следующим образом:
+
+![](./img/inter.png)
+
+Чтобы увидеть графическое представление анализа данных на основе составленного расписания, нажмите на одну из четырех кнопок. Каждая из них подписана в соответствии с графиком.
+
+![](./img/tadjyk4.png)
+
+
 # Заключение
 
-...
+
 
 `ya`
