@@ -49,6 +49,7 @@
 
 ![](./img/tadjyk2.png)
 
+![](./img/tadjyk3.png)
 # Заключение
 
 ...
