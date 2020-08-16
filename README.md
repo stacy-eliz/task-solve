@@ -57,7 +57,7 @@
 
 # How to use
 
-Для того чтобы запустить десктопное приложение, необходимо запустить файл [`graph.py`](https://github.com/stacy-eliz/task-solve/blob/master/graph.py) 
+Для того чтобы запустить десктопное приложение, необходимо запустить файл **[`graph.py`](https://github.com/stacy-eliz/task-solve/blob/master/graph.py)**
 
 Интерфейс выглядит следующим образом:
 
@@ -67,8 +67,22 @@
 
 ![](./img/tadjyk4.png)
 
+При запуске программы **[`generator.py`](https://github.com/stacy-eliz/task-solve/blob/master/generator.py)** в файле **output.xlsx** появится распределение комнат по расписанию.
+
+***До:***
+
+![](./img/do.png)
+
+***После:***
+
+![](./img/audit.png)
+
+При запуске **[`save_xls.py`]**(https://github.com/stacy-eliz/task-solve/blob/master/save_xls.py) изменяется файл **`output.xlsx`** таким образом, что в него добавляются преподаватели в соответствии со своими параметрами и годовым расписанием.
+
+
 
 # Заключение
+
 
 
 
